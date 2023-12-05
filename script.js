@@ -23,13 +23,6 @@ let food = {
 let inputDir = {x: 0, y: -1};
 let isGameOver = false;
 let score = 0;
-let highScore = localStorage.getItem("hiscore");
-if (highScore === null) {
-    highScore = 0;
-    localStorage.setItem("highScore", JSON.stringify(highScore));
-} else {
-    highScore = JSON.parse(highScore);
-}
 
 window.onload = audioPlay(gameStartSound);
 
@@ -95,8 +88,8 @@ function gameEngine() {
         inputDir = {x: 0, y: -1};
         snakeArr = [{x: 13, y: 13}];
         food = {
-            x: Math.round(Math.random() * 22),
-            y: Math.round(Math.random() * 22),
+            x: Math.floor(Math.random() * (21 - 1 + 1) + 1),
+            y: Math.floor(Math.random() * (21 - 1 + 1) + 1),
         };
         score = 0;
         return;
@@ -115,10 +108,6 @@ function gameEngine() {
         foodEatenSound.play();
         foodEatenSound.loop = false;
         score += 1;
-        if (score > highScore) {
-            highScore = score;
-            localStorage.setItem("highScore", JSON.stringify(highScore));
-        }
     }
 
     //Moving the snake
@@ -134,9 +123,6 @@ function gameEngine() {
     board.innerHTML = `<div class="score">
         <div>
             Score: <span class="crnt-score">${score}</span>
-        </div>
-        <div>
-            High Score: <span class="high-score">${highScore}</span>
         </div>
     </div>`;
     snakeArr.forEach((e, index) => {

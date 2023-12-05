@@ -74,7 +74,6 @@
       top: 1%;
       right: 4%;
       display: flex;
-      flex-direction: column;
       font-size: 1.2rem;
       font-family: 'game-score';
       color: rgb(0, 0, 0);
