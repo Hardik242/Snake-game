@@ -1,0 +1,122 @@
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+
+}
+
+@font-face {
+      font-family: 'game-start-over';
+      src: url('assets/game-start-over-font.otf');
+}
+
+@font-face {
+      font-family: 'game-score';
+      src: url('assets/game-score-font.ttf');
+}
+
+.body {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background-image: url(assets/snake-bg.jpg);
+      background-size: 100vw 100vh;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+.board {
+      position: relative;
+      width: 95vmin;
+      height: 95vmin;
+      background: linear-gradient(-45deg, rgb(170, 236, 170) 25%, rgb(236, 236, 167)) 50%;
+      border: 2px solid black;
+      display: grid;
+      grid-template-rows: repeat(22, 1fr);
+      grid-template-columns: repeat(22, 1fr);
+}
+
+.game-start,
+.game-over {
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 10;
+      transform: translate(-50%, -50%);
+      font-family: 'game-start-over';
+      font-size: 5rem;
+      text-wrap: wrap;
+      text-align: center;
+      line-height: 0.6;
+      cursor: pointer;
+      color: #753232;
+      animation: scaleUpDown 2s infinite linear;
+      animation-direction: alternate;
+      animation-fill-mode: both;
+}
+
+.game-start span,
+.game-over p {
+      color: black;
+      padding-top: 12px;
+      font-size: 2rem;
+      text-wrap: wrap;
+      text-align: center;
+}
+
+
+
+.score {
+      position: absolute;
+      top: 1%;
+      right: 4%;
+      display: flex;
+      flex-direction: column;
+      font-size: 1.2rem;
+      font-family: 'game-score';
+      color: rgb(0, 0, 0);
+}
+
+.crnt-score,
+.high-score {
+      font-size: 1.1rem;
+      font-family: 'game-score';
+}
+
+.snake-head {
+      background: rgb(252, 255, 0);
+      background: radial-gradient(circle, rgba(252, 255, 0, 1) 0%, rgba(17, 255, 0, 1) 100%);
+      border-radius: 10px;
+      border: 2px solid rgb(94, 94, 94);
+      transform: scale(1.2, 1.2);
+}
+
+
+.snake-body {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      border: 2px solid black;
+      background: rgb(254, 255, 183);
+      background: radial-gradient(circle, rgba(254, 255, 183, 1) 0%, rgba(156, 255, 149, 1) 100%);
+}
+
+.food {
+      background-image: url(assets/food-img.png);
+      object-fit: cover;
+      background-size: cover;
+      background-repeat: no-repeat;
+}
+
+@keyframes scaleUpDown {
+      from {
+            transform: scale(1, 1) translate(-45%, -50%);
+      }
+
+      to {
+            transform: scale(1.1, 1.1) translate(-45%, -50%);
+      }
+}
