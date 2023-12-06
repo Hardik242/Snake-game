@@ -13,7 +13,7 @@ let direction = {
     x: 0,
     y: 0,
 };
-let speed = 8;
+let speed = 5;
 let lastPaintTime = 0;
 let snakeArr = [{x: 13, y: 13}];
 let food = {
@@ -23,6 +23,7 @@ let food = {
 let inputDir = {x: 0, y: -1};
 let isGameOver = false;
 let score = 0;
+let times = 1;
 
 window.onload = audioPlay(gameStartSound);
 
@@ -150,6 +151,10 @@ function mainStart(ctime) {
             window.location.reload();
         });
         return;
+    }
+    if (snakeArr.length > times * 3) {
+        speed += 0.5;
+        times++;
     }
     window.requestAnimationFrame(mainStart);
     if ((ctime - lastPaintTime) / 1000 < 1 / speed) {
