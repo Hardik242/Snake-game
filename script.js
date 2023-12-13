@@ -1,4 +1,5 @@
 let gameStartSound = new Audio("assets/game-start-sound.mp3");
+let bonusSound = new Audio("assets/bonus-sound.mp3");
 let bgMusic = new Audio("assets/bg-music.mp3");
 let foodEatenSound = new Audio("assets/food-eaten.mp3");
 let gameOverSound = new Audio("assets/game-over.mp3");
@@ -24,6 +25,11 @@ let inputDir = {x: 0, y: -1};
 let isGameOver = false;
 let score = 0;
 let times = 1;
+let bonus = {
+    x: Math.floor(Math.random() * 22),
+    y: Math.floor(Math.random() * 22),
+};
+isBonusShown = false;
 
 window.onload = audioPlay(gameStartSound);
 
@@ -36,7 +42,9 @@ function gameStartClick() {
     audioPause(gameStartSound);
     gameStartScreen.hidden = true;
     gameOverScreen.hidden = true;
-    audioPlay(bgMusic);
+    // audioPlay(bgMusic);
+    bgMusic.play();
+    bgMusic.volume = 0.1;
     bgMusic.loop = true;
     isGameOver = false;
     mainStart();
@@ -143,6 +151,38 @@ function gameEngine() {
     foodElement.style.gridRowStart = food.y;
     foodElement.style.gridColumnStart = food.x;
     board.appendChild(foodElement);
+
+    // Add bonus fruit
+
+    if (snakeArr.length % 5 === 0 && snakeArr.length !== 0) {
+        // console.log("inside create bonus");
+        let bonus_food = document.createElement("div");
+        bonus_food.classList.add("bonus");
+        bonus_food.style.gridRowStart = bonus.y;
+        bonus_food.style.gridColumnStart = bonus.x;
+        board.appendChild(bonus_food);
+        isBonusShown = true;
+    }
+
+    //Bonus fruit eaten
+    if (
+        snakeArr[0].x === bonus.x &&
+        snakeArr[0].y === bonus.y &&
+        isBonusShown
+    ) {
+        console.log("inside bonus eaten");
+        snakeArr.unshift({
+            x: snakeArr[0].x + inputDir.x,
+            y: snakeArr[0].y + inputDir.y,
+        });
+        bonus = {
+            x: Math.floor(Math.random() * (22 - 2) + 2),
+            y: Math.floor(Math.random() * (22 - 2) + 2),
+        };
+        score += 5;
+        audioPlay(bonusSound);
+        isBonusShown = false;
+    }
 }
 
 function mainStart(ctime) {
@@ -153,7 +193,7 @@ function mainStart(ctime) {
         return;
     }
     if (snakeArr.length > times * 3) {
-        speed += 0.5;
+        speed += 0.8;
         times++;
     }
     window.requestAnimationFrame(mainStart);
@@ -173,22 +213,18 @@ window.addEventListener("keydown", (e) => {
         case "ArrowUp":
             inputDir.x = 0;
             inputDir.y = -1;
-            console.log("key pressed");
             break;
         case "ArrowDown":
             inputDir.x = 0;
             inputDir.y = 1;
-            console.log("key pressed");
             break;
         case "ArrowRight":
             inputDir.x = 1;
             inputDir.y = 0;
-            console.log("key pressed");
             break;
         case "ArrowLeft":
             inputDir.x = -1;
             inputDir.y = 0;
-            console.log("key pressed");
             break;
 
         default:

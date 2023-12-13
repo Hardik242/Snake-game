@@ -110,6 +110,14 @@
       background-repeat: no-repeat;
 }
 
+.bonus {
+      background-image: url(assets/golden-apple.png);
+      object-fit: cover;
+      background-size: cover;
+      background-repeat: no-repeat;
+      /* background-color: red; */
+}
+
 @keyframes scaleUpDown {
       from {
             transform: scale(1, 1) translate(-45%, -50%);
