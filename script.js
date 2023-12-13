@@ -17,8 +17,8 @@ let speed = 5;
 let lastPaintTime = 0;
 let snakeArr = [{x: 13, y: 13}];
 let food = {
-    x: Math.round(Math.random() * 22),
-    y: Math.round(Math.random() * 22),
+    x: Math.floor(Math.random() * (22 - 1) + 1),
+    y: Math.floor(Math.random() * (22 - 1) + 1),
 };
 let inputDir = {x: 0, y: -1};
 let isGameOver = false;
@@ -89,8 +89,8 @@ function gameEngine() {
         inputDir = {x: 0, y: -1};
         snakeArr = [{x: 13, y: 13}];
         food = {
-            x: Math.floor(Math.random() * (21 - 1 + 1) + 1),
-            y: Math.floor(Math.random() * (21 - 1 + 1) + 1),
+            x: Math.floor(Math.random() * (22 - 2) + 2),
+            y: Math.floor(Math.random() * (22 - 2) + 2),
         };
         score = 0;
         return;
@@ -99,8 +99,8 @@ function gameEngine() {
     // If food eaten update score, food and snake
     if (snakeArr[0].x === food.x && snakeArr[0].y === food.y) {
         food = {
-            x: Math.round(Math.random() * 21 + 1),
-            y: Math.round(Math.random() * 21 + 1),
+            x: Math.floor(Math.random() * (22 - 2) + 2),
+            y: Math.floor(Math.random() * (22 - 2) + 2),
         };
         snakeArr.unshift({
             x: snakeArr[0].x + inputDir.x,
