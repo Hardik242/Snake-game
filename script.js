@@ -154,7 +154,7 @@ function gameEngine() {
 
     // Add bonus fruit
 
-    if (snakeArr.length % 5 === 0 && snakeArr.length !== 0) {
+    if (snakeArr.length % 10 === 0 && snakeArr.length !== 0) {
         // console.log("inside create bonus");
         let bonus_food = document.createElement("div");
         bonus_food.classList.add("bonus");
@@ -176,8 +176,8 @@ function gameEngine() {
             y: snakeArr[0].y + inputDir.y,
         });
         bonus = {
-            x: Math.floor(Math.random() * (22 - 2) + 2),
-            y: Math.floor(Math.random() * (22 - 2) + 2),
+            x: Math.floor(Math.random() * 22),
+            y: Math.floor(Math.random() * 22),
         };
         score += 5;
         audioPlay(bonusSound);
@@ -188,11 +188,13 @@ function gameEngine() {
 function mainStart(ctime) {
     if (isGameOver) {
         window.addEventListener("keydown", (e) => {
-            window.location.reload();
+            if (e.key === "Enter") {
+                window.location.reload();
+            }
         });
         return;
     }
-    if (snakeArr.length > times * 3) {
+    if (snakeArr.length > times * 4) {
         speed += 0.8;
         times++;
     }
